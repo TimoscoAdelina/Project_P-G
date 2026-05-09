@@ -1,17 +1,19 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DECIMAL
-from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import  Column, Integer, String, ForeignKey, DECIMAL, ForeignKeyConstraint
+from sqlalchemy.orm import relationship
+#from sqlalchemy.ext.declarative import declarative_base
+from database import Base
+#le am scos din prima: create_engine, 
+#am scos din .orm sessionmaker
+# # Define the MySQL database
+# DATABASE_URL = "mssql+pyodbc://DESKTOP-SC82VPV/proiect?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
+# #engine = create_engine(DATABASE_URL)
+# #Base = declarative_base()
 
-# Define the MySQL database
-DATABASE_URL = "mssql+pyodbc://DESKTOP-V3CINPQ/proiect?driver=ODBC+Driver+17+for+SQL+Server&trusted_connection=yes"
-engine = create_engine(DATABASE_URL)
-Base = declarative_base()
-
-try:
-    with engine.connect() as connection:
-        print("Database connected successfully!")
-except Exception as e:
-    print(f"Error connecting to database: {e}")
+# try:
+#     with engine.connect() as connection:
+#         print("Database connected successfully!")
+# except Exception as e:
+#     print(f"Error connecting to database: {e}")
 
 class Identifier(Base):
     __tablename__ = 'Identifiers'
@@ -19,8 +21,6 @@ class Identifier(Base):
     identifier_name = Column(String(255), primary_key=True)
     description = Column(String(255))
     identifier_type = Column(String(255))
-
-#fscnknfck
 
 class Country(Base):
     __tablename__ = 'Countries'
@@ -87,4 +87,7 @@ class IdentifierCharacteristic(Base):
     master_name = Column(String(255), ForeignKey('Characteristics.master_name'), primary_key=True)
     characteristic_name = Column(String(255), ForeignKey('Characteristics.name'), primary_key=True)
     identifier = relationship('Identifier')
-    characteristic = relationship('Characteristic', primaryjoin="and_(IdentifierCharacteristic.master_name==Characteristic.master_name, 			IdentifierCharacteristic.characteristic_name==Characteristic.name)")            
+    characteristic = relationship('Characteristic', primaryjoin="and_(IdentifierCharacteristic.master_name==Characteristic.master_name, 			IdentifierCharacteristic.characteristic_name==Characteristic.name)")    
+
+    
+            

@@ -157,8 +157,8 @@ class Application:
 def run_app():
     connection_string = (
         "Driver={ODBC Driver 17 for SQL Server};"
-        "Server=(localdb)\\localhost;"
-        "Database=Dummy;"
+        "Server= DESKTOP=SC8SVPV;"
+        "Database=proiect;"
         "Trusted_Connection=yes;"
     )
 
